@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bhaskar | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    header, footer {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .section {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    .about, .projects, .contact, .todo, .shop {
+      margin-top: 40px;
+    }
+
+    .project-list img, .shop-items img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input, textarea, select, button {
+      padding: 10px;
+      margin-top: 10px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background: #04AA6D;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #037a53;
+    }
+
+    .task-item {
+      display: flex;
+      justify-content: space-between;
+      background: #f1f1f1;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .remove-btn {
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    .shop-item {
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .shop-item h4 {
+      margin: 10px 0;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Bhaskar's Portfolio</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <a href="#todo">To-Do App</a>
+      <a href="#shop">Product Page</a>
+    </nav>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="section about">
+    <h2>About Me</h2>
+    <p>Hello! I'm Bhaskar, a web developer passionate about building responsive, interactive websites using HTML, CSS, and JavaScript. This portfolio showcases my skills in building full-featured web applications.</p>
+    <img src="https://picsum.photos/id/1005/800/300" alt="Banner" style="width:100%; margin-top:20px; border-radius:10px;">
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section projects">
+    <h2>My Projects</h2>
+    <div class="grid grid-3 project-list">
+      <div class="card">
+        <img src="https://picsum.photos/id/1011/300/200" alt="Project 1" />
+        <h4>Portfolio Website</h4>
+        <p>Responsive multi-page website with navigation and interactivity.</p>
+      </div>
+      <div class="card">
+        <img src="https://picsum.photos/id/1012/300/200" alt="Project 2" />
+        <h4>To-Do App</h4>
+        <p>JavaScript-based To-Do app with local storage persistence.</p>
+      </div>
+      <div class="card">
+        <img src="https://picsum.photos/id/1016/300/200" alt="Project 3" />
+        <h4>Product Filter</h4>
+        <p>Interactive filtering and sorting of products using DOM manipulation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact">
+    <h2>Contact Me</h2>
+    <form onsubmit="alert('Message Sent!'); return false;">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="4" placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- To-Do App Section -->
+  <section id="todo" class="section todo">
+    <h2>To-Do List (With Local Storage)</h2>
+    <input type="text" id="taskInput" placeholder="Enter a task" />
+    <button onclick="addTask()">Add Task</button>
+    <div id="taskList"></div>
+  </section>
+
+  <!-- Shop Section -->
+  <section id="shop" class="section shop">
+    <h2>Product Page (Filter & Sort)</h2>
+    <div class="filters">
+      <select id="categoryFilter" onchange="filterProducts()">
+        <option value="all">All Categories</option>
+        <option value="electronics">Electronics</option>
+        <option value="fashion">Fashion</option>
+      </select>
+      <select id="priceSort" onchange="sortProducts()">
+        <option value="default">Sort by Price</option>
+        <option value="low">Low to High</option>
+        <option value="high">High to Low</option>
+      </select>
+    </div>
+    <div class="grid grid-3 shop-items" id="productGrid"></div>
+  </section>
+
+  <footer>
+    &copy; 2025 Bhaskar | Built with ❤️ using HTML, CSS & JS
+  </footer>
+
+  <script>
+    // ------------------ TO-DO LIST WITH LOCAL STORAGE ------------------
+    function loadTasks() {
+      const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      const taskList = document.getElementById("taskList");
+      taskList.innerHTML = "";
+      tasks.forEach((task, index) => {
+        const div = document.createElement("div");
+        div.className = "task-item";
+        div.innerHTML = `${task} <button class='remove-btn' onclick='removeTask(${index})'>Remove</button>`;
+        taskList.appendChild(div);
+      });
+    }
+
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      const task = input.value.trim();
+      if (task) {
+        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        tasks.push(task);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        input.value = "";
+        loadTasks();
+      }
+    }
+
+    function removeTask(index) {
+      const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      tasks.splice(index, 1);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      loadTasks();
+    }
+
+    // ------------------ PRODUCT FILTER & SORT ------------------
+    const products = [
+      { name: "Smartphone", category: "electronics", price: 400, image: "https://picsum.photos/id/1010/300/200" },
+      { name: "Headphones", category: "electronics", price: 100, image: "https://picsum.photos/id/1013/300/200" },
+      { name: "Sneakers", category: "fashion", price: 80, image: "https://picsum.photos/id/1020/300/200" },
+      { name: "Watch", category: "fashion", price: 150, image: "https://picsum.photos/id/1021/300/200" },
+    ];
+
+    function displayProducts(items) {
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+      items.forEach(p => {
+        grid.innerHTML += `
+          <div class="shop-item">
+            <img src="${p.image}" alt="${p.name}">
+            <h4>${p.name}</h4>
+            <p>Category: ${p.category}</p>
+            <p>Price: $${p.price}</p>
+          </div>`;
+      });
+    }
+
+    function filterProducts() {
+      const category = document.getElementById("categoryFilter").value;
+      let filtered = category === "all" ? products : products.filter(p => p.category === category);
+      displayProducts(filtered);
+    }
+
+    function sortProducts() {
+      const sort = document.getElementById("priceSort").value;
+      let sorted = [...products];
+      if (sort === "low") sorted.sort((a, b) => a.price - b.price);
+      if (sort === "high") sorted.sort((a, b) => b.price - a.price);
+      displayProducts(sorted);
+    }
+
+    // ------------------ INIT ------------------
+    window.onload = () => {
+      loadTasks();
+      displayProducts(products);
+    };
+  </script>
+
+</body>
+</html>
+
